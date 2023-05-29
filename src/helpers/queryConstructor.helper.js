@@ -4,7 +4,7 @@ const queryConstructor = (initialQuery, querystring, groupBy) => {
   const { fromCity, toCity, limit, offset, orderBy, desc, minPrice, maxPrice, city } = { ...querystring };
   let query = initialQuery;
   const dependencyArray = [];
-  console.log({ fromCity, toCity, limit, offset, orderBy, desc, minPrice, maxPrice });
+
   if (fromCity) {
     dependencyArray.push(fromCity);
     query += ` AND departure_city_id=$${dependencyArray.length}`;
