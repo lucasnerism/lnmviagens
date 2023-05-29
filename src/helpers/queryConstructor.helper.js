@@ -5,15 +5,15 @@ const queryConstructor = (initialQuery, querystring, groupBy) => {
   let query = initialQuery;
   const dependencyArray = [];
 
-  if (fromCity) {
+  if (fromCity && fromCity !== "null") {
     dependencyArray.push(fromCity);
     query += ` AND departure_city_id=$${dependencyArray.length}`;
   }
-  if (toCity) {
+  if (toCity && toCity !== "null") {
     dependencyArray.push(toCity);
     query += ` AND arrival_city_id=$${dependencyArray.length}`;
   }
-  if (city) {
+  if (city && city !== "null") {
     dependencyArray.push(city);
     query += ` AND city_id=$${dependencyArray.length}`;
   }
