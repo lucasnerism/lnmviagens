@@ -9,6 +9,27 @@ const getFlights = async (querystring) => {
   }
 };
 
+const getFlightById = async (id) => {
+  try {
+    const result = await fligthsRepository.getFlightById(id);
+    return { status: 200, response: result.rows[0] };
+  } catch (error) {
+    return { status: 500, response: { message: error.message } };
+  }
+};
+
+const postFlight = async (body) => {
+  try {
+    await fligthsRepository.postFlight(body);
+    return { status: 201, response: { message: "Vôo criado" } };
+  } catch (error) {
+    return { status: 500, response: { message: error.message } };
+  }
+};
+
+
 export default {
-  getFlights
+  getFlights,
+  getFlightById,
+  postFlight
 };
