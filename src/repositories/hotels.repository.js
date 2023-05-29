@@ -23,7 +23,7 @@ const getHotelById = (id) => {
   return db.query(`
   SELECT
         h.id, h.name, h.description, h.price,c.name AS "cityName", p1.image AS "mainImage",
-        JSON_AGG(f.name) AS "facilities",
+        JSON_AGG(DISTINCT f.name) AS "facilities",
         JSON_AGG(p2.image) AS "images"
     FROM hotels h
     JOIN hotels_facilities hf ON hf.hotel_id = h.id
@@ -32,6 +32,7 @@ const getHotelById = (id) => {
     JOIN hotel_pictures p1 ON p1.id = h.main_picture
     JOIN hotel_pictures p2 ON p2.hotel_id = h.id AND p2.id <> h.main_picture
     WHERE h.id=$1
+    GROUP BY h.id,c.name,p1.image,p2.id;
   `, [id]);
 };
 
